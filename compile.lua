@@ -72,21 +72,3 @@ local s = table.concat(t)
 local hnd = io.open('prospero.lua', 'wb')
 hnd:write(s)
 hnd:close()
-
--- local sdf = loadstring(s)()
-local sdf = require'prospero'
-
-local n = 200
-
-local hnd = io.open('prospero.ppm', 'wb')
-hnd:write(string.format('P5\n%i\n%i\n255\n', n, n))
-
-for r=1,n do
-    for c=1,n do
-        local x = -1 + 2 * (c-1)/n
-        local y = 1 - 2 * (r-1)/n
-        hnd:write(sdf(x, y) < 0 and string.char(0xff) or string.char(0))
-    end
-end
-hnd:close()
--- local n = 1024
